@@ -4,6 +4,44 @@ const fetch = require('node-fetch');
 // * user model
 const User = require('../Models/user');
 
+// route: GET /coinList
+exports.getCoinList = (req, res, next) => {
+    let coinsList = [];
+    let coinsL = [];
+
+    fetch('https://pro-api.coinmarketcap.com/v1/cryptocurrency/listings/latest?limit=5000', {
+        headers: {
+            method: 'GET',
+            'X-CMC_PRO_API_KEY': 'beaf807f-da5e-427f-897a-c0381a8a1e49'
+        }
+    }).then((data) => {
+        return data.json(); // returns the first api results
+    }).then((coins) => {
+        let coinsListLength = coins.data.length;
+        
+
+        for(let i = 0; i < coinsListLength; i++ ){ // fetching all symbols from the coins data array
+            coinsList.push(coins.data[i].symbol);
+        }
+        
+        for(let x = 0; x < coinsListLength; x++) { // creating a new array with objects
+            let obj = {name: coinsList[x]};
+            coinsL.push(obj);
+        }
+        console.log('coinsList symnols', coinsList); //! testing coinslist array
+
+        res // return the data to the user
+            .status(200)
+            .json({ 
+                message: `Coin List fetched`,
+                // coinsList: coinsList
+                coinsList: coinsL
+                });
+    }).catch((err) => {
+        console.log(err);
+    })
+};
+
 // route POST /coinSearched
 exports.postCoinSearched = (req, res, next) => {
     const coinSearched = req.body.coinSearched.toUpperCase(); // user search

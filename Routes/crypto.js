@@ -10,6 +10,9 @@ const cryptoController = require('../Controller/crypto');
 // * auth middleware
 const isAuth = require('../middleware/is-auth');
 
+// route: GET /coinList
+router.get('/coinList', cryptoController.getCoinList);
+
 // route: POST /coinSearched
 router.post('/coinSearched', cryptoController.postCoinSearched);
 
@@ -38,6 +41,7 @@ router.post('/clearCoins', isAuth, cryptoController.clearCoins);
 router.get('/summary', isAuth, cryptoController.getSummary);
 
 // router.post('/coinUpdates', isAuth, cryptoController.getUpdates);
+
 
 // ! exporting the router
 module.exports = router;
