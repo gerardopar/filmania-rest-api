@@ -40,8 +40,6 @@ router.post('/clearCoins', isAuth, cryptoController.clearCoins);
 // route GET /summary 
 router.get('/summary', isAuth, cryptoController.getSummary);
 
-// router.post('/coinUpdates', isAuth, cryptoController.getUpdates);
-
 
 // ! exporting the router
 module.exports = router;

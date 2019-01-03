@@ -28,7 +28,6 @@ exports.getCoinList = (req, res, next) => {
             let obj = {name: coinsList[x]};
             coinsL.push(obj);
         }
-        console.log('coinsList symnols', coinsList); //! testing coinslist array
 
         res // return the data to the user
             .status(200)
@@ -191,7 +190,6 @@ exports.getCoins = (req, res, next) => {
         return currentUser.coins;
     })
     .then((data) => {
-        console.log('user coins', data)
         res
         .status(200)
         .json({ 
@@ -208,54 +206,6 @@ exports.getCoins = (req, res, next) => {
 
 
 }
-
-//! test method for updating coins via the client side
-// exports.getUpdates = (req, res, next) => {
-//     const coinToUpdate = req.body.coin;
-    
-//     fetch(`https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest?symbol=${coinToUpdate}`, {
-//         headers: {
-//             method: 'GET',
-//             'X-CMC_PRO_API_KEY': 'beaf807f-da5e-427f-897a-c0381a8a1e49'
-//         }
-//         }).then((data) => {
-//             return data.json();
-//         })
-//         .then((coin) => {
-//             console.log(coin);
-//             res
-//             .status(200)
-//             .json({ 
-//                 message: `$coin update details fetched`,
-//                 coin: coin
-//             });
-//         })
-//         .catch((err) => (console.log(err)));
-// };
-
-// // route: GET /coins
-// exports.getCoins = (req, res, next) => {
-
-//     User.findById(req.userId)
-//         .then((user) => {
-//             return user.coins;
-//         })
-//         .then((coins) => {
-//             res
-//             .status(200)
-//             .json({ 
-//                 message: `User Coins fetched`,
-//                 coins: coins
-//             });
-//         })
-//         .catch((err) => {
-//             if(!err.statusCode) {
-//                 err.statusCode = 500;
-//             }
-//             next(err);
-//         });
-
-// };
 
 // route: DELETE /removeCoin
 exports.removeCoin = (req, res, next) => {

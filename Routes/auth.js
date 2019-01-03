@@ -34,14 +34,26 @@ router.put(
         body('name') // user_name validation
             .trim()
             .not()
-            // .isEmpty()
     ],
 
     authController.signup // controller logic
 );
 
 // route: POST /login
-router.post('/login', authController.login);
+router.post('/login',
+    [   // express validation
+        body('email') // user_email validation
+            .isEmail()
+            .withMessage('Please enter a valid email.')
+            .normalizeEmail(),
+        body('password') // user_password validation
+            .trim()
+            .isLength({ min: 5 }),
+        body('name') // user_name validation
+            .trim()
+            .not()
+    ],
+    authController.login);
 
 // ! exporting the router
 module.exports = router;
