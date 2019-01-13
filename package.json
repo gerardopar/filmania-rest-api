@@ -8,8 +8,9 @@
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "NODE_ENV=production MONGO_USER=root MONGO_PASSWORD=Kief323812! MONGO_DEFAULT_DATABASE=cryptolio node app.js",
-    "start:dev": "nodemon app.js"
+    "start": "NODE_ENV=production MONGO_USER=root MONGO_PASSWORD=Kief323812! MONGO_DEFAULT_DATABASE=filmania node app.js",
+    "start:dev": "nodemon app.js",
+    "server": "nodemon app.js"
   },
   "author": "Gerardo Paredes",
   "license": "ISC",

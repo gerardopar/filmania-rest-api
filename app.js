@@ -10,7 +10,8 @@ const mongoose = require('mongoose'); // mongoDB extension
 const app = express();
 
 // * importing app routes
-const cryptoRoutes = require('./Routes/crypto');
+// const cryptoRoutes = require('./Routes/crypto');
+const movieRoutes = require('./Routes/movie');
 const authRoutes = require('./Routes/auth');
 
 // * app middleware
@@ -25,8 +26,9 @@ app.use((req, res, next) => {
 });
 
 // * routes 
-app.use(cryptoRoutes);
+// app.use(cryptoRoutes);
 app.use(authRoutes);
+app.use(movieRoutes);
 
 // ! express error checking middleware (statusCode: 500)
 app.use((error, req, res, next) => {
@@ -39,10 +41,12 @@ app.use((error, req, res, next) => {
 
 // * server initialized
 mongoose
-    // .connect(`mongodb+srv://root:Kief323812!@cluster0-4ucqx.mongodb.net/cryptolio?retryWrites=true`) // mongoDB instance
-    .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-4ucqx.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`) // mongoDB instance
+    .connect(`mongodb+srv://root:Kief323812!@cluster0-4ucqx.mongodb.net/filmania?retryWrites=true`) // mongoDB instance
+    // .connect(`mongodb+srv://${process.env.MONGO_USER}:${process.env.MONGO_PASSWORD}@cluster0-4ucqx.mongodb.net/${process.env.MONGO_DEFAULT_DATABASE}`) // mongoDB instance
     .then((result) => {
-        app.listen(process.env.PORT || 3000);
+        // app.listen(process.env.PORT || 3000);
+        app.listen(3000);
+
     })
     .catch((err) => {
         console.log(err);
