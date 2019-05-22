@@ -7,7 +7,7 @@ const User = require('../Models/user');
 // route: GET /movies/action
 exports.getActionMovies = (req, res, next) => {
     const currentPage = req.query.page || 1;
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=28`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=28`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -29,7 +29,7 @@ exports.getActionMovies = (req, res, next) => {
 // route: GET /movies/adventure
 exports.getAdventureMovies = (req, res, next) => {
     const currentPage = req.query.page || 1;
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=12`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=12`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -51,7 +51,7 @@ exports.getAdventureMovies = (req, res, next) => {
 // route: GET /movies/animation
 exports.getAnimationMovies = (req, res, next) => {
     const currentPage = req.query.page || 1;
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=16`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=16`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -73,7 +73,7 @@ exports.getAnimationMovies = (req, res, next) => {
 // route: GET /movies/comedy
 exports.getComedyMovies = (req, res, next) => {
     const currentPage = req.query.page || 1; // pagination inital page
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=35`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=35`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -94,7 +94,7 @@ exports.getComedyMovies = (req, res, next) => {
 
 exports.getDocumentaryMovies = (req, res, next) => {
     const currentPage = req.query.page || 1; // pagination inital page
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=99`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=99`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -115,7 +115,7 @@ exports.getDocumentaryMovies = (req, res, next) => {
 
 exports.getDramaMovies = (req, res, next) => {
     const currentPage = req.query.page || 1; // pagination inital page
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=18`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=18`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -136,7 +136,7 @@ exports.getDramaMovies = (req, res, next) => {
 
 exports.getFantasyMovies = (req, res, next) => {
     const currentPage = req.query.page || 1; // pagination inital page
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=14`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=14`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -157,7 +157,7 @@ exports.getFantasyMovies = (req, res, next) => {
 
 exports.getHorrorMovies = (req, res, next) => {
     const currentPage = req.query.page || 1; // pagination inital page
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=27`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=27`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -178,7 +178,7 @@ exports.getHorrorMovies = (req, res, next) => {
 
 exports.getScienceFictionMovies = (req, res, next) => {
     const currentPage = req.query.page || 1; // pagination inital page
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=878`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=878`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -199,7 +199,7 @@ exports.getScienceFictionMovies = (req, res, next) => {
 
 exports.getThrillerMovies = (req, res, next) => {
     const currentPage = req.query.page || 1; // pagination inital page
-    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=53`, {
+    fetch(`https://api.themoviedb.org/3/discover/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&sort_by=popularity.desc&include_adult=false&include_video=false&page=${currentPage}&with_genres=53`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -220,7 +220,7 @@ exports.getThrillerMovies = (req, res, next) => {
 
 exports.getPopularMovies = (req, res, next) => {
     const currentPage = req.query.page || 1; // pagination inital page
-    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&page=${currentPage}`, {
+    fetch(`https://api.themoviedb.org/3/movie/popular?api_key=${process.env.API_SECRET_KEY}&language=en-US&page=${currentPage}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
