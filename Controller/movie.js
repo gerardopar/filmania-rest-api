@@ -239,6 +239,103 @@ exports.getPopularMovies = (req, res, next) => {
         .catch((err) => (console.log(err)));
 }
 
+exports.postMovieSearched = (req, res, next) => {
+    const movieTitle = req.body.movieTitle;
+
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&query=${movieTitle}&page=1&include_adult=false`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(data => data.json())
+    .then((movie) => {
+        const movieId = movie.results[0].id;
+        console.log(movieId);
+        res
+            .status(200)
+            .json({ 
+                message: `Movie searched Successfully`,
+                movieId
+            });
+    })
+    .catch(err => (err));
+};
+
+exports.postMovieDetails = (req, res, next) => {
+    const movieId = req.body.movieId;
+    let movie = {};
+
+    // # fetching the movie details
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=35d4df93498d535a82e07c079691b79c&language=en-US`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    })
+    .then(data => data.json())
+    .then((movieData) => {
+        
+            movie.backdrop = `https://image.tmdb.org/t/p/w1280/${movieData.backdrop_path}`;
+            movie.genres = movieData.genres;
+            movie.id = movieData.id;
+            movie.length = movieData.runtime;
+            movie.overview = movieData.overview;
+            movie.poster = `https://image.tmdb.org/t/p/w500/${movieData.poster_path}`;
+            movie.rating = movieData.vote_average;
+            movie.rdate = movieData.release_date;
+            movie.title = movieData.title;
+
+        // # fetching the movie trailer
+        fetch(`http://api.themoviedb.org/3/movie/${movieData.id}/videos?api_key=35d4df93498d535a82e07c079691b79c`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+        })
+        .then(data => data.json())
+        .then((trailer) => {
+            movie.video = `https://www.youtube.com/embed/${trailer.results[0].key}`;
+            res
+            .status(200)
+            .json({ 
+                message: `Movie details fetched successfully`,
+                movie
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+    })
+    .catch((err) => {
+        console.log(err);
+    });
+};
+
+exports.postSimilarMovies = (req, res, next) => {
+    const movieId = req.body.movieId;
+    
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&page=1`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(data => data.json())
+        .then((movies) => {
+            console.log('similar movies', movies);
+            res
+            .status(200)
+            .json({ 
+                message: `Similar movies fetched Successfully`,
+                movies: movies.results
+            });
+        })
+        .catch((err) => {
+            console.log(err);
+        });
+};
+
 exports.postAddMovieToFavorites = (req, res, next) => {
     const movieToAdd = req.body.movieToAdd;
     const movie = {

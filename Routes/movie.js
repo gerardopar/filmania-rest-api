@@ -12,6 +12,12 @@ const isAuth = require('../middleware/is-auth');
 
 router.post('/movies/addToFav', isAuth, movieController.postAddMovieToFavorites);
 
+router.post('/movies/postMovieSearched', movieController.postMovieSearched);
+
+router.post('/movies/postMovieDetails', movieController.postMovieDetails);
+
+router.post('/movies/postSimilarMovies', movieController.postSimilarMovies);
+
 router.get('/movies/action', movieController.getActionMovies);
 
 router.get('/movies/adventure', movieController.getAdventureMovies);
