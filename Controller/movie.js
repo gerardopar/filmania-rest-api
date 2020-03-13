@@ -20,7 +20,8 @@ exports.getActionMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -42,7 +43,8 @@ exports.getAdventureMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -64,7 +66,8 @@ exports.getAnimationMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -86,7 +89,8 @@ exports.getComedyMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -107,7 +111,8 @@ exports.getDocumentaryMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -128,7 +133,8 @@ exports.getDramaMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -149,7 +155,8 @@ exports.getFantasyMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -170,7 +177,8 @@ exports.getHorrorMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -191,7 +199,8 @@ exports.getScienceFictionMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -212,7 +221,8 @@ exports.getThrillerMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
@@ -233,7 +243,8 @@ exports.getPopularMovies = (req, res, next) => {
             res
                 .status(200)
                 .send({
-                    movies: movies.results
+                    movies: movies.results,
+                    totalPages: movies.total_pages
                 })
         })
         .catch((err) => (console.log(err)));
