@@ -10,13 +10,13 @@ const movieController = require('../Controller/movie');
 // * auth middleware
 const isAuth = require('../middleware/is-auth');
 
-router.post('/movies/addToFav', isAuth, movieController.postAddMovieToFavorites);
+router.post('/movies/movie/favorite', isAuth, movieController.postAddMovieToFavorites);
 
-router.post('/movies/postMovieSearched', movieController.postMovieSearched);
+router.post('/movies/movie/search', movieController.postMovieSearched);
 
-router.post('/movies/postMovieDetails', movieController.postMovieDetails);
+router.post('/movies/movie/details', movieController.postMovieDetails);
 
-router.post('/movies/postSimilarMovies', movieController.postSimilarMovies);
+router.post('/movies/similar', movieController.postSimilarMovies);
 
 router.get('/movies/action', movieController.getActionMovies);
 
