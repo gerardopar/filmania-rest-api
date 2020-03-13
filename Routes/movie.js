@@ -14,9 +14,9 @@ router.post('/movies/addToFav', isAuth, movieController.postAddMovieToFavorites)
 
 router.post('/movies/postMovieSearched', movieController.postMovieSearched);
 
-router.post('/movies/movie/details', movieController.postMovieDetails);
-
 router.post('/movies/similar', movieController.postSimilarMovies);
+
+router.get('/movies/movie/details/:movieId', movieController.postMovieDetails);
 
 router.get('/movies/action', movieController.getActionMovies);
 
