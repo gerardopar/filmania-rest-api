@@ -262,7 +262,7 @@ exports.postMovieSearched = (req, res, next) => {
     .catch(err => (err));
 };
 
-exports.postMovieDetails = (req, res, next) => {
+exports.getMovieDetails = (req, res, next) => {
     const movieId = req.params.movieId;
     let movie = {};
 
@@ -312,7 +312,7 @@ exports.postMovieDetails = (req, res, next) => {
     });
 };
 
-exports.postSimilarMovies = (req, res, next) => {
+exports.getSimilarMovies = (req, res, next) => {
     const movieId = req.params.movieId;
     
     fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&page=1`, {
