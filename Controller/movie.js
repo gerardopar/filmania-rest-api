@@ -442,7 +442,7 @@ exports.getMovieCast = (req, res, next) => {
         })
         .then(data => data.json())
         .then((movie) => {
-            const castMembers = movie.cast.slice(0, 5);
+            const castMembers = movie.cast.slice(0, 4);
             res
             .status(200)
             .json({ 
