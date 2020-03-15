@@ -442,12 +442,12 @@ exports.getMovieCast = (req, res, next) => {
         })
         .then(data => data.json())
         .then((movie) => {
-            const castMemebers = movie.cast.slice(0, 5);
+            const castMembers = movie.cast.slice(0, 5);
             res
             .status(200)
             .json({ 
                 message: `Movie cast fetched Successfully`,
-                castMemebers
+                castMembers
             });
         })
         .catch((err) => {
