@@ -431,8 +431,7 @@ exports.deleteFavMovie = (req, res, next) => {
 
 // route: GET: /movies/movies/cast/:id 
 exports.getMovieCast = (req, res, next) => {
-    // const movieId = req.params.movieId;
-    const movieId = 419704;
+    const movieId = req.params.movieId;
     
     fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.API_SECRET_KEY}`, {
             method: 'GET',
