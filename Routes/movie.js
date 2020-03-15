@@ -18,6 +18,8 @@ router.get('/movies/similar/:movieId', movieController.getSimilarMovies);
 
 router.get('/movies/movie/details/:movieId', movieController.getMovieDetails);
 
+router.get('/movies/movie/cast/:movieId', movieController.getMovieCast);
+
 router.get('/movies/action', movieController.getActionMovies);
 
 router.get('/movies/adventure', movieController.getAdventureMovies);

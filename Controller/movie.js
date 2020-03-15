@@ -442,7 +442,6 @@ exports.getMovieCast = (req, res, next) => {
         })
         .then(data => data.json())
         .then((movie) => {
-            console.log('cast data', movie.cast);
             const castMemebers = movie.cast.slice(0, 5);
             res
             .status(200)
