@@ -250,10 +250,11 @@ exports.getPopularMovies = (req, res, next) => {
         .catch((err) => (console.log(err)));
 }
 
+// TODO: switch route POST -> GET
 exports.postMovieSearched = (req, res, next) => {
     const movieTitle = req.body.movieTitle;
 
-    fetch(`https://api.themoviedb.org/3/search/movie?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&query=${movieTitle}&page=1&include_adult=false`, {
+    fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&query=${movieTitle}&page=1&include_adult=false`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -278,7 +279,7 @@ exports.getMovieDetails = (req, res, next) => {
     let movie = {};
 
     // # fetching the movie details
-    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=35d4df93498d535a82e07c079691b79c&language=en-US`, {
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_SECRET_KEY}&language=en-US`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -298,7 +299,7 @@ exports.getMovieDetails = (req, res, next) => {
             movie.title = movieData.title;
 
         // # fetching the movie trailer
-        fetch(`http://api.themoviedb.org/3/movie/${movieData.id}/videos?api_key=35d4df93498d535a82e07c079691b79c`, {
+        fetch(`http://api.themoviedb.org/3/movie/${movieData.id}/videos?api_key=${process.env.API_SECRET_KEY}`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -326,7 +327,7 @@ exports.getMovieDetails = (req, res, next) => {
 exports.getSimilarMovies = (req, res, next) => {
     const movieId = req.params.movieId;
     
-    fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=35d4df93498d535a82e07c079691b79c&language=en-US&page=1`, {
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}/similar?api_key=${process.env.API_SECRET_KEY}&language=en-US&page=1`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -425,5 +426,32 @@ exports.deleteFavMovie = (req, res, next) => {
                 err.statusCode = 500;
             }
             next(err);
+        });
+};
+
+// route: GET: /movies/movies/cast/:id 
+exports.getMovieCast = (req, res, next) => {
+    // const movieId = req.params.movieId;
+    const movieId = 419704;
+    
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}/credits?api_key=${process.env.API_SECRET_KEY}`, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json'
+            }
+        })
+        .then(data => data.json())
+        .then((movie) => {
+            console.log('cast data', movie.cast);
+            const castMemebers = movie.cast.slice(0, 5);
+            res
+            .status(200)
+            .json({ 
+                message: `Movie cast fetched Successfully`,
+                castMemebers
+            });
+        })
+        .catch((err) => {
+            console.log(err);
         });
 };
