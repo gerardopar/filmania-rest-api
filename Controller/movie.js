@@ -419,29 +419,30 @@ exports.getFavoriteMovies = (req, res, next) => {
 
 // route: DELETE /movies/removeMovie
 exports.deleteFavMovie = (req, res, next) => {
-    const movieId = req.body.id;
-    let movies;
+    const movieId = req.params.movieId;
+    const userId = req.userId
 
-    User.findById(req.userId)
+    User.findById(userId)
         .then((user) => {
-            movies = user.movies.filter((movie) => (movie.id.toString() !== movieId.toString()));
-            user.movies = movies;
-            return user.save();
-        })
-        .then((result) => {
-            res
-            .status(201)
-            .json({ // send the data to the client after saving the post to the DB
-                message: 'Movie removed successfully',
-                movies: result
+            Movie.findById(user.movies)
+            .then((moviesFound) => {
+                let movies = moviesFound.movies;
+                moviesFound.movies = movies.filter((movie) => movie._id.toString() !== movieId.toString());
+                moviesFound.save();
+                res
+                .status(200)
+                .json({ 
+                    message: `Movies fetched Successfully`,
+                    movies: moviesFound.movies
+                });
+            }).catch((err) => {
+                console.log(err)
             });
         })
-        .catch((err) => { // catch any errors
-            if(!err.statusCode) {
-                err.statusCode = 500;
-            }
-            next(err);
-        });
+        .catch((err) => {
+            console.log(err);
+        })
+    
 };
 
 // route: GET: /movies/movies/cast/:id 
