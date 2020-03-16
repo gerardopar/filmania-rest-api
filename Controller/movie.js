@@ -3,6 +3,7 @@ const fetch = require('node-fetch');
 
 // * user model
 const User = require('../Models/user');
+const Movie = require('../Models/movies');
 
 // route: GET /movies/action
 exports.getActionMovies = (req, res, next) => {
@@ -349,7 +350,7 @@ exports.getSimilarMovies = (req, res, next) => {
 
 exports.postAddMovieToFavorites = (req, res, next) => {
     const movieToAdd = req.body.movieToAdd;
-    const movie = {
+    const movieObj = {
         movie_tmdb_id: movieToAdd.movie_id,
         movie_poster: movieToAdd.movie_poster,
         movie_title: movieToAdd.movie_title,
@@ -358,15 +359,34 @@ exports.postAddMovieToFavorites = (req, res, next) => {
 
     User.findById(req.userId)
         .then((user) => {
-            user.movies.push(movie);
-            return user.save();
+
+            if(user.movies !== undefined) {
+                Movie.findById(user.movies).then((moviesFound) => {
+                    moviesFound.movies.push(movieObj);
+                    moviesFound.save();
+                })
+                .catch((err) => {
+                    if(!err.statusCode) {
+                        err.statusCode = 500;
+                    }
+                    next(err);
+                });
+            } else {
+                const movie = new Movie({
+                    movies: [movieObj]
+                });
+                movie.save()
+                user.movies = movie._id;
+                return user.save();
+            }
+
+            return user;
         })
         .then((result) => {
             res
             .status(200)
             .json({ 
                 message: `Movie added Successfully`,
-                movie
             });
         })
         .catch((err) => {
@@ -378,28 +398,24 @@ exports.postAddMovieToFavorites = (req, res, next) => {
 };
 
 exports.getFavoriteMovies = (req, res, next) => {
-
     User.findById(req.userId)
         .then((user) => {
-            return user.movies;
-        })
-        .then((movies) => {
-            console.log(movies)
-
-            res
-            .status(200)
-            .json({ 
-                message: `Movies fetched Successfully`,
-                movies: movies
+            Movie.findById(user.movies)
+            .then((moviesFound) => {
+                res
+                .status(200)
+                .json({ 
+                    message: `Movies fetched Successfully`,
+                    movies: moviesFound.movies
+                });
+            }).catch((err) => {
+                console.log(err)
             });
         })
         .catch((err) => {
-            if(!err.statusCode) {
-                err.statusCode = 500;
-            }
-            next(err);
-        });
-};
+            console.log(err);
+        })
+}
 
 // route: DELETE /movies/removeMovie
 exports.deleteFavMovie = (req, res, next) => {

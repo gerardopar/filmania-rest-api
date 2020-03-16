@@ -11,16 +11,17 @@ const userSchema = new Schema({
         type: String,
         required: true
     },
-    movies: [ // user_movies
-        {
-            movieId: { type: Schema.Types.ObjectId },
-            movie_tmdb_id: { type: String, required: true },
-            movie_poster: { type: String, required: true },
-            movie_rating: { type: Number, required: false },
-            movie_title: { type: String, required: true }
-        }
-        ]
+    // movies: [ // user_movies
+    //     {
+    //         movieId: { type: Schema.Types.ObjectId },
+    //         movie_tmdb_id: { type: String, required: true },
+    //         movie_poster: { type: String, required: true },
+    //         movie_rating: { type: Number, required: false },
+    //         movie_title: { type: String, required: true }
+    //     }
+    //     ],
+    movies: { type: Schema.Types.ObjectId, ref: 'Movie' },
 });
 
-module.exports = mongoose.model('User', userSchema); // exporting the postSchema model
+module.exports = mongoose.model('User', userSchema);
 
