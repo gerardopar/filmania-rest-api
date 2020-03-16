@@ -250,9 +250,9 @@ exports.getPopularMovies = (req, res, next) => {
         .catch((err) => (console.log(err)));
 }
 
-// TODO: switch route POST -> GET
-exports.postMovieSearched = (req, res, next) => {
-    const movieTitle = req.body.movieTitle;
+exports.getMovieSearched = (req, res, next) => {
+    // const movieTitle = req.body.movieTitle;
+    const movieTitle = req.params.movieTitle;
 
     fetch(`https://api.themoviedb.org/3/search/movie?api_key=${process.env.API_SECRET_KEY}&language=en-US&query=${movieTitle}&page=1&include_adult=false`, {
         method: 'GET',
@@ -263,7 +263,6 @@ exports.postMovieSearched = (req, res, next) => {
     .then(data => data.json())
     .then((movie) => {
         const movieId = movie.results[0].id;
-        console.log(movieId);
         res
             .status(200)
             .json({ 
