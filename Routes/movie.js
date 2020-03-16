@@ -42,9 +42,10 @@ router.get('/movies/popular', movieController.getPopularMovies);
 
 router.get('/movies/favorites', isAuth, movieController.getFavoriteMovies);
 
+// TODO: switch to /movies/movie/:movieId
 router.delete('/movies/deleteFav', isAuth, movieController.deleteFavMovie);
 
-router.post('/movies/addToFav', isAuth, movieController.postAddMovieToFavorites);
+router.post('/movies/movie', isAuth, movieController.postAddMovieToFavorites);
 
 // ! exporting the router
 module.exports = router;
