@@ -277,9 +277,10 @@ exports.getMovieSearched = (req, res, next) => {
 exports.getMovieDetails = (req, res, next) => {
     const movieId = req.params.movieId;
     let movie = {};
+    let data = {};
 
     // # fetching the movie details
-    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_SECRET_KEY}&language=en-US`, {
+    fetch(`https://api.themoviedb.org/3/movie/${movieId}?api_key=${process.env.API_SECRET_KEY}&language=en-US&append_to_response=watch/providers`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json'
@@ -287,6 +288,7 @@ exports.getMovieDetails = (req, res, next) => {
     })
     .then(data => data.json())
     .then((movieData) => {
+            console.log('movie data', movieData);
         
             movie.backdrop = `https://image.tmdb.org/t/p/w1280/${movieData.backdrop_path}`;
             movie.genres = movieData.genres;
@@ -297,6 +299,8 @@ exports.getMovieDetails = (req, res, next) => {
             movie.rating = movieData.vote_average;
             movie.rdate = movieData.release_date;
             movie.title = movieData.title;
+            
+            data = {...movieData};
 
         // # fetching the movie trailer
         fetch(`http://api.themoviedb.org/3/movie/${movieData.id}/videos?api_key=${process.env.API_SECRET_KEY}`, {
@@ -308,11 +312,17 @@ exports.getMovieDetails = (req, res, next) => {
         .then(data => data.json())
         .then((trailer) => {
             movie.video = `https://www.youtube.com/embed/${trailer.results[0].key}`;
+            data = {
+                    ...data, 
+                    trailer: `https://www.youtube.com/embed/${trailer.results[0].key}`, 
+                    videoId: trailer.results[0].key
+                };
             res
             .status(200)
             .json({ 
                 message: `Movie details fetched successfully`,
-                movie
+                movie,
+                data
             });
         })
         .catch((err) => {
@@ -457,7 +467,7 @@ exports.getMovieCast = (req, res, next) => {
         })
         .then(data => data.json())
         .then((movie) => {
-            const castMembers = movie.cast.slice(0, 4);
+            const castMembers = movie.cast;
             res
             .status(200)
             .json({ 
